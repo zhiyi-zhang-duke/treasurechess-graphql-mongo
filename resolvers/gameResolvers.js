@@ -45,6 +45,13 @@ const GameResolvers = new GraphQLSchema({
                     var result = GameModel.find({ opening : args.openingType}).limit(50).exec()
                     return result;
                 }
+            },
+            openingTypes: {
+                type: GraphQLList(GraphQLString),
+                resolve: (root, args, context, info) => {
+                    var result = GameModel.find().distinct('opening').exec()
+                    return result;
+                }
             }
         }
     }),
